@@ -1,4 +1,5 @@
-import { format } from "date-fns";
+import { format, setDefaultOptions } from "date-fns";
+import { th } from "date-fns/locale";
 interface NewsItemProps {
   article: {
     Date: string;
@@ -12,6 +13,7 @@ interface NewsItemProps {
   truncateText: (text: string, length: number) => string;
 }
 
+setDefaultOptions({ locale: th });
 
 const NewsItem = ({ article, truncateText }: NewsItemProps) => {
   const formattedDate = format(new Date(), "dd MMM yyyy");
