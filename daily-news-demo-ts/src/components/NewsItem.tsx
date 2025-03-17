@@ -1,5 +1,3 @@
-import { format, setDefaultOptions } from "date-fns";
-import { th } from "date-fns/locale";
 interface NewsItemProps {
   article: {
     Date: string;
@@ -13,10 +11,8 @@ interface NewsItemProps {
   truncateText: (text: string, length: number) => string;
 }
 
-setDefaultOptions({ locale: th });
 
 const NewsItem = ({ article, truncateText }: NewsItemProps) => {
-  const formattedDate = format(new Date(), "dd MMM yyyy");
   return (
     <li className="mb-8">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden relative">
@@ -45,7 +41,14 @@ const NewsItem = ({ article, truncateText }: NewsItemProps) => {
           )}
 
           <div className="flex justify-between items-center mt-4">
-            <p className="text-sm text-gray-500">ลงไว้เมื่อวันที่ : {formattedDate}</p>
+            <p className="text-sm text-gray-500">
+              ลงไว้เมื่อวันที่ :{" "}
+              {new Intl.DateTimeFormat("th-TH", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }).format(new Date(article.Date))}
+            </p>
             <a href={article.SourceLink} target="_blank" rel="noopener noreferrer">
               <img
                 src={article.SourceImage}
