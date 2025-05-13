@@ -7,7 +7,6 @@ export default function AquaShare() {
   const [totalWaterCost, setTotalWaterCost] = useState(1200);
   const [users, setUsers] = useState([{ name: '', amount: 300 }]);
   const [timeOfDay, setTimeOfDay] = useState<'กลางวัน' | 'กลางคืน'>('กลางวัน');
-  const [dateString, setDateString] = useState('');
   const [editableDate, setEditableDate] = useState('');
   const contentRef = useRef(null);
 
@@ -21,7 +20,6 @@ export default function AquaShare() {
       'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
     ];
     const formatted = `${day} เดือน ${months[month]} ปี ${year}`;
-    setDateString(formatted);
     setEditableDate(formatted);
   }, []);
 
@@ -134,9 +132,6 @@ export default function AquaShare() {
             </div>
           </span>
         </div>
-
-
-
 
         {users.map((user, index) => (
           <div key={index} className="user-row">
