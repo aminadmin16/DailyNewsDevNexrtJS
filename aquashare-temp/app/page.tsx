@@ -23,18 +23,11 @@ export default function AquaShare() {
     setEditableDate(formatted);
   }, []);
 
-  const handleAmountChange = (index: number, value: number) => {
-    const newUsers = [...users];
-    newUsers[index].amount = value;
-    setUsers(newUsers);
-  };
-
   const handleDivide = (index: number, divisor: number) => {
     const newUsers = [...users];
     newUsers[index].amount = Math.round(newUsers[index].amount / divisor);
     setUsers(newUsers);
 
-    // Add rows based on divisor
     if (divisor === 2) {
       setUsers([...newUsers, { ...newUsers[index] }]);
     } else if (divisor === 3) {
@@ -43,12 +36,9 @@ export default function AquaShare() {
   };
 
   const removeUser = (index: number) => {
-    if (index === 0) return; // Don't allow deleting the first row
-
+    if (index === 0) return;
     const newUsers = users.filter((_, i) => i !== index);
     setUsers(newUsers);
-
-    // If all rows are removed, add the default row back
     if (newUsers.length === 0) {
       setUsers([{ name: '', amount: 300 }]);
     }
@@ -57,17 +47,8 @@ export default function AquaShare() {
   const addUser = () => {
     const newUsers = [...users];
     const remaining = totalWaterCost - newUsers.reduce((sum, user) => sum + user.amount, 0);
-    const newAmount = remaining > 0 ? remaining : 300; // Use remaining if it's positive, else use default amount
+    const newAmount = remaining > 0 ? remaining : 300;
     newUsers.push({ name: '', amount: newAmount });
-    setUsers(newUsers);
-  };
-
-  // New clear function to reset all user data
-  const clearFields = () => {
-    const newUsers = users.map(user => ({
-      name: '',
-      amount: 300,
-    }));
     setUsers(newUsers);
   };
 
@@ -106,12 +87,9 @@ export default function AquaShare() {
         />
       </div>
 
-
-
       <div ref={contentRef}>
         <div className="date-label" style={{ fontWeight: 'bold', fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="date-group" style={{ display: 'flex', alignItems: 'center' }}>
-
             <input
               type="text"
               className="input"
@@ -120,7 +98,6 @@ export default function AquaShare() {
               style={{ marginRight: '20px', width: '100%' }}
             />
           </div>
-
           <span className="red-text" style={{ fontSize: '18px', color: 'red' }}>
             <div className="button-group">
               <button
@@ -152,7 +129,7 @@ export default function AquaShare() {
               value={user.amount}
               onChange={(e) => {
                 const rawValue = e.target.value;
-                const numericValue = rawValue.replace(/^0+/, ''); // ตัดศูนย์นำหน้า
+                const numericValue = rawValue.replace(/^0+/, '');
                 const valueAsNumber = Number(numericValue) || 0;
 
                 const newUsers = [...users];
@@ -160,15 +137,12 @@ export default function AquaShare() {
                 setUsers(newUsers);
               }}
             />
-            {/* Show divide buttons only for rows other than the last one */}
             {index === users.length - 1 && (
               <>
                 <button className="button small" onClick={() => handleDivide(index, 2)}>÷2</button>
                 <button className="button small" onClick={() => handleDivide(index, 3)}>÷3</button>
               </>
             )}
-
-            {/* Add delete button, but don't allow deleting the first row */}
             {index !== 0 && (
               <button className="button small" onClick={() => removeUser(index)}>❌ ลบ</button>
             )}
@@ -188,7 +162,6 @@ export default function AquaShare() {
       <button onClick={exportToImage} className="button full-width">
         📤 แชร์รายการเป็นภาพ
       </button>
-
     </div>
   );
 }
