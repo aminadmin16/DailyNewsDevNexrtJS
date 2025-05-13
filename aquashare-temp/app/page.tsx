@@ -119,7 +119,7 @@ export default function AquaShare() {
               className="input"
               value={editableDate}
               onChange={handleDateChange}
-              style={{ marginRight: '20px', width: '100%'  }}
+              style={{ marginRight: '20px', width: '100%' }}
             />
           </div>
 
@@ -151,13 +151,20 @@ export default function AquaShare() {
               }}
             />
             <input
-              type="number"
+              type="text"
               className="input"
               style={{ width: '80px' }}
               value={user.amount}
-              onChange={(e) => handleAmountChange(index, Number(e.target.value.replace(/^0+/, '')))} // Remove leading zeroes
-            />
+              onChange={(e) => {
+                const rawValue = e.target.value;
+                const numericValue = rawValue.replace(/^0+/, ''); // ตัดศูนย์นำหน้า
+                const valueAsNumber = Number(numericValue) || 0;
 
+                const newUsers = [...users];
+                newUsers[index].amount = valueAsNumber;
+                setUsers(newUsers);
+              }}
+            />
             {/* Show divide buttons only for rows other than the last one */}
             {index === users.length - 1 && (
               <>
