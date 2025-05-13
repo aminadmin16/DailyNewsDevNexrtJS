@@ -1,0 +1,92 @@
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    font-family: sans-serif;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group,
+.user-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.label {
+    flex: none;
+    min-width: 120px;
+}
+
+.button {
+    padding: 6px 12px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #005bb5;
+}
+
+.button.small {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+}
+
+.button.full-width {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.highlight-day {
+    background-color: #facc15;
+    /* yellow-400 */
+    color: black;
+}
+
+.highlight-night {
+    background-color: #1e3a8a;
+    /* blue-900 */
+}
+
+.date-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.red-text {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.amount-display {
+    margin-top: 10px;
+    font-weight: bold;
+}
